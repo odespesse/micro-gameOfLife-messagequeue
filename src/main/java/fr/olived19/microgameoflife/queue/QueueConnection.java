@@ -1,4 +1,4 @@
-package queue;
+package fr.olived19.microgameoflife.queue;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

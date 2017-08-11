@@ -1,10 +1,9 @@
-package queue;
+package fr.olived19.microgameoflife.queue;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
-import queue.QueueConnection;
 
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;

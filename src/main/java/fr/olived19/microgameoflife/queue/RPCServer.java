@@ -1,7 +1,7 @@
-package queue;
+package fr.olived19.microgameoflife.queue;
 
 import com.rabbitmq.client.*;
-import messages.Message;
+import fr.olived19.microgameoflife.messages.Message;
 
 import java.io.IOException;
 
