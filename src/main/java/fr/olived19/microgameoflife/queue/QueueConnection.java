@@ -24,12 +24,28 @@ public class QueueConnection {
         factory.setUsername(this.username);
         factory.setPassword(this.password);
         factory.setConnectionTimeout(this.connectionTimeout);
-        try {
-            this.connection = factory.newConnection();
-        } catch (IOException | TimeoutException e) {
-            throw new RuntimeException(e);
-        }
+        connectWithRetries(factory);
         return this;
+    }
+
+    private void connectWithRetries(ConnectionFactory factory) {
+        final int MAX_RETRIES = 40;
+        for (int i = 0; i <= MAX_RETRIES; i++) {
+            try {
+                this.connection = factory.newConnection();
+                break;
+            } catch (IOException | TimeoutException e) {
+                if (i == MAX_RETRIES) {
+                    throw new RuntimeException(e);
+                } else {
+                    try {
+                        Thread.sleep(500);
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        }
     }
 
     protected Channel createChannel() {
